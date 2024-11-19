@@ -1,0 +1,5 @@
+# Ignore deps
+node_modules
+
+# Ignore build
+dist

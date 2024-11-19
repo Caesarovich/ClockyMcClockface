@@ -9,7 +9,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN bun install --frozen-lockfile
+RUN bun install --frozen-lockfile --production
 
 RUN bun run build
 
