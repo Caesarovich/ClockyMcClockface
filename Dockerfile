@@ -9,9 +9,9 @@ WORKDIR /app
 
 COPY . .
 
-RUN bun install
+RUN bun install --frozen-lockfile
 
-RUN bun run build --frozen-lockfile
+RUN bun run build
 
 ENV NODE_ENV=production
 
