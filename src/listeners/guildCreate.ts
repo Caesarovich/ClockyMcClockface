@@ -1,7 +1,6 @@
 import { ApplyOptions } from "@sapphire/decorators";
 import { Listener } from "@sapphire/framework";
 import { type Guild, userMention } from "discord.js";
-import { db } from "../lib/db";
 import { getGuildInfo } from "../lib/utils";
 
 @ApplyOptions<Listener.Options>({})
@@ -17,10 +16,8 @@ export class UserEvent extends Listener<"guildCreate"> {
 		const mention = userMention(clientId);
 		mention;
 
-		// guild.systemChannel?.send(
-		// 	`Hello! I am ${mention}! Thank you for inviting me to your server! You can configure me by using my **slash commands** !`,
-		// );
-
-		db;
+		guild.systemChannel?.send(
+			`Hello! I am ${mention}! Thank you for inviting me to your server! You can configure me by using my **slash commands** !`,
+		);
 	}
 }
