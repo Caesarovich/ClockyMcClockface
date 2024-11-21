@@ -1,13 +1,13 @@
 # ClockyMcClockface
 
-This is a Discord bot that will play Clock sounds in voice chat every hour. It can be useful to remind you of the time, or just to annoy your friends :)
+This is a Discord bot that will play clock sounds in voice chat every hour. It can be useful to remind you of the time, or just to annoy your friends :)
 
 ## Development
 
 ### Requirements
 This project uses the [Bun](https://bun.sh/) runtime and its SQLite driver. It also requires [FFmpeg](https://ffmpeg.org/) to be installed to play audio files.
 
-You can use the [Devcontaier](https://containers.dev/) configuration to easily develop this project in a containerized environment.
+You can use the [Devcontainer](https://containers.dev/) configuration to easily develop this project in a containerized environment.
 
 If you are on [NixOS](https://nixos.org/), you can use the provided `flake.nix` file to get a development environment with all the required dependencies by running the following command:
 
