@@ -1,8 +1,8 @@
 import { ApplyOptions } from "@sapphire/decorators";
 import { Listener } from "@sapphire/framework";
 import { type Guild, userMention } from "discord.js";
-import { getGuildInfo } from "../lib/utils";
 import { createGuildPreferences } from "../lib/guildPreferences";
+import { getGuildInfo } from "../lib/utils";
 
 @ApplyOptions<Listener.Options>({})
 export class UserEvent extends Listener<"guildCreate"> {

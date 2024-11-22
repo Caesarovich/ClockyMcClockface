@@ -6,8 +6,8 @@ import {
 	InteractionContextType,
 	time,
 } from "discord.js";
-import { getGuildPreferences } from "../lib/guildPreferences";
 import type { GuildPreferences } from "../db/schema";
+import { getGuildPreferences } from "../lib/guildPreferences";
 
 @ApplyOptions<Command.Options>({
 	description: "Displays the current time information",

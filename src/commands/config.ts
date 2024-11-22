@@ -3,17 +3,17 @@ import { Command } from "@sapphire/framework";
 import {
 	ApplicationIntegrationType,
 	type AutocompleteInteraction,
-	channelMention,
 	ChannelType,
 	EmbedBuilder,
 	InteractionContextType,
 	PermissionFlagsBits,
+	channelMention,
 } from "discord.js";
+import type { GuildPreferences } from "../db/schema";
 import {
 	getGuildPreferences,
 	updateGuildPreferences,
 } from "../lib/guildPreferences";
-import type { GuildPreferences } from "../db/schema";
 
 function configViewEmbed(prefs: GuildPreferences) {
 	return new EmbedBuilder()

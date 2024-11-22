@@ -1,7 +1,7 @@
 import type { Guild } from "discord.js";
-import { db } from "../db";
-import { guildPreferences, type GuildPreferencesInsert } from "../db/schema";
 import { eq } from "drizzle-orm";
+import { db } from "../db";
+import { type GuildPreferencesInsert, guildPreferences } from "../db/schema";
 
 export async function createGuildPreferences(guild: Guild) {
 	return db
