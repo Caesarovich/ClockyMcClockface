@@ -1,10 +1,12 @@
 import { ApplyOptions } from "@sapphire/decorators";
 import { Command } from "@sapphire/framework";
 import {
+	ApplicationIntegrationType,
 	type AutocompleteInteraction,
 	channelMention,
 	ChannelType,
 	EmbedBuilder,
+	InteractionContextType,
 	PermissionFlagsBits,
 } from "discord.js";
 import {
@@ -50,10 +52,19 @@ function configViewEmbed(prefs: GuildPreferences) {
 })
 export class UserCommand extends Command {
 	public override registerApplicationCommands(registry: Command.Registry) {
+		// These allow the command to be used in guilds and DMs
+		const integrationTypes: ApplicationIntegrationType[] = [
+			ApplicationIntegrationType.GuildInstall,
+		];
+
+		const contexts: InteractionContextType[] = [InteractionContextType.Guild];
+
 		registry.registerChatInputCommand((builder) =>
 			builder
 				.setName(this.name)
 				.setDescription(this.description)
+				.setContexts(contexts)
+				.setIntegrationTypes(integrationTypes)
 				.setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild)
 				.addSubcommand((subcommand) =>
 					subcommand

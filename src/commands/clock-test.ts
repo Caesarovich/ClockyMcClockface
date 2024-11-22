@@ -8,6 +8,7 @@ import { audioUrls } from "../lib/constants";
 
 @ApplyOptions<Command.Options>({
 	description: "Plays a test sound in your voice channel",
+	preconditions: ["GuildOnly"],
 })
 export class UserCommand extends Command {
 	// Register Chat Input and Context Menu command
@@ -16,13 +17,8 @@ export class UserCommand extends Command {
 		// These allow the command to be used in guilds and DMs
 		const integrationTypes: ApplicationIntegrationType[] = [
 			ApplicationIntegrationType.GuildInstall,
-			ApplicationIntegrationType.UserInstall,
 		];
-		const contexts: InteractionContextType[] = [
-			InteractionContextType.BotDM,
-			InteractionContextType.Guild,
-			InteractionContextType.PrivateChannel,
-		];
+		const contexts: InteractionContextType[] = [InteractionContextType.Guild];
 
 		// Register Chat Input command
 		registry.registerChatInputCommand({
