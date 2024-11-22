@@ -2,11 +2,9 @@ import { ApplyOptions } from "@sapphire/decorators";
 import { Command } from "@sapphire/framework";
 import { ApplicationIntegrationType, InteractionContextType } from "discord.js";
 
-// import { join } from "node:path";
 import { createAudioResource } from "@discordjs/voice";
 import { playClockSound } from "../lib/clock";
 import { audioUrls } from "../lib/constants";
-// import { audioDir } from "../lib/constants";
 
 @ApplyOptions<Command.Options>({
 	description: "Plays a test sound in your voice channel",
