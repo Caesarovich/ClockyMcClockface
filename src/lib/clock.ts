@@ -5,13 +5,18 @@ import {
 	type VoiceConnection,
 	VoiceConnectionStatus,
 	createAudioPlayer,
+	createAudioResource,
 	entersState,
 	joinVoiceChannel,
 } from "@discordjs/voice";
-import type { VoiceBasedChannel } from "discord.js";
+import type { Guild, VoiceBasedChannel } from "discord.js";
 
 import { container } from "@sapphire/framework";
 import { getVoiceChannelInfo } from "./utils";
+import { db } from "../db";
+import { guildPreferences } from "../db/schema";
+import { eq } from "drizzle-orm";
+import { audioUrls } from "./constants";
 
 function createConnection(channel: VoiceBasedChannel): VoiceConnection {
 	const connection = joinVoiceChannel({
@@ -82,4 +87,59 @@ export function playClockSound(
 		connection.destroy();
 		container.logger.debug("Clock sound finished playing");
 	});
+}
+
+function findMostActiveChannel(guild: Guild): VoiceBasedChannel | null {
+	let mostActiveChannel: VoiceBasedChannel | null = null;
+	let mostActiveUsers = 0;
+
+	for (const channel of guild.channels.cache.values()) {
+		if (!channel.isVoiceBased()) continue;
+
+		const voiceChannel = channel as VoiceBasedChannel;
+
+		if (voiceChannel.members.size > mostActiveUsers) {
+			mostActiveChannel = voiceChannel;
+			mostActiveUsers = voiceChannel.members.size;
+		}
+	}
+
+	return mostActiveChannel;
+}
+
+export async function playClockInAllGuilds() {
+	const guildPrefs = await db
+		.select()
+		.from(guildPreferences)
+		.where(eq(guildPreferences.enabled, true));
+
+	const audioResource = createAudioResource(audioUrls.clockBellChimes);
+
+	for (const guildPref of guildPrefs) {
+		const guild = container.client.guilds.cache.get(guildPref.guildId);
+
+		if (!guild) {
+			container.logger.warn(
+				`Guild ${guildPref.guildId} not found - skipping playing clock`,
+			);
+			continue;
+		}
+
+		let channel: VoiceBasedChannel | null = guild.channels.cache.get(
+			guildPref.staticChannelId ?? "",
+		) as VoiceBasedChannel;
+
+		if (guildPref.mode === "dynamic") {
+			channel = findMostActiveChannel(guild);
+		}
+
+		if (!channel) {
+			container.logger.warn(
+				`Channel ${guildPref.staticChannelId} not found in guild ${guild.id} - skipping playing clock`,
+			);
+			continue;
+		}
+
+		playClockSound(channel as VoiceBasedChannel, audioResource);
+	}
 }
