@@ -24,12 +24,12 @@
 		"libsodium-wrappers": "^0.7.15",
 		"sodium": "^3.0.2",
 		"typescript": "~5.7.2",
+		"better-sqlite3": "^11.5.0",
 		"drizzle-kit": "^0.28.1"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
 		"@sapphire/cli": "^1.9.3",
-		"better-sqlite3": "^11.5.0",
 		"tsc-watch": "^6.2.1"
 	},
 	"scripts": {
