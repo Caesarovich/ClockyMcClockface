@@ -37,11 +37,13 @@
 		"generate": "sapphire generate",
 		"build": "tsc",
 		"watch": "tsc -w",
-		"start": "bun run dist/index.js",
+		"start": "bun run migrate && bun run dist/index.js",
 		"dev": "bun run build && bun run start",
 		"watch:start": "tsc-watch --onSuccess \"npm run start\"",
 		"format": "biome check --fix .",
 		"format-check": "biome format",
-		"lint-check": "biome lint"
+		"lint-check": "biome lint",
+		"generate:migrations": "drizzle-kit",
+		"migrate": "drizzle-kit migrate"
 	}
 }
