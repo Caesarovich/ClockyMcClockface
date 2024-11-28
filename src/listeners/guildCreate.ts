@@ -14,12 +14,13 @@ export class UserEvent extends Listener<"guildCreate"> {
 		const clientId = this.container.client.user?.id;
 		if (!clientId) return;
 
+		createGuildPreferences(guild);
+
+		if (!guild.systemChannel?.isSendable()) return;
 		const mention = userMention(clientId);
 
 		guild.systemChannel?.send(
 			`Hello! I am ${mention}! Thank you for inviting me to your server! You can configure me by using my **slash commands** !`,
 		);
-
-		createGuildPreferences(guild);
 	}
 }
