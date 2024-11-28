@@ -10,6 +10,7 @@ import {
 	white,
 	yellow,
 } from "colorette";
+import { ActivityType } from "discord.js";
 
 const dev = process.env.NODE_ENV !== "production";
 
@@ -20,6 +21,14 @@ export class UserEvent extends Listener {
 	public override run() {
 		this.printBanner();
 		this.printStoreDebugInformation();
+		this.changeStatus();
+	}
+
+	private changeStatus() {
+		this.container.client.user?.setActivity({
+			type: ActivityType.Custom,
+			name: "tick, tock, tick, tock...",
+		});
 	}
 
 	private printBanner() {
