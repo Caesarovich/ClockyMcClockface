@@ -2,8 +2,8 @@ import {
 	type ChatInputCommandSuccessPayload,
 	type Command,
 	type ContextMenuCommandSuccessPayload,
-	type MessageCommandSuccessPayload,
 	container,
+	type MessageCommandSuccessPayload,
 } from "@sapphire/framework";
 import { cyan } from "colorette";
 import type { APIUser, Guild, User, VoiceBasedChannel } from "discord.js";

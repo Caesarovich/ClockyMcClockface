@@ -1,25 +1,24 @@
+import { createReadStream } from "node:fs";
 import {
 	type AudioPlayer,
 	AudioPlayerStatus,
 	type AudioResource,
-	type DiscordGatewayAdapterCreator,
-	type VoiceConnection,
-	VoiceConnectionStatus,
 	createAudioPlayer,
 	createAudioResource,
+	type DiscordGatewayAdapterCreator,
 	entersState,
 	joinVoiceChannel,
+	type VoiceConnection,
+	VoiceConnectionStatus,
 } from "@discordjs/voice";
-import type { Guild, VoiceBasedChannel } from "discord.js";
 
 import { container } from "@sapphire/framework";
-import { getVoiceChannelInfo } from "./utils";
+import type { Guild, VoiceBasedChannel } from "discord.js";
+import { eq } from "drizzle-orm";
 import { db } from "../db";
 import { type GuildPreferences, guildPreferences } from "../db/schema";
-import { eq } from "drizzle-orm";
 import { audioPaths } from "./constants";
-
-import { createReadStream } from "node:fs";
+import { getVoiceChannelInfo } from "./utils";
 
 export type Hour = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
@@ -49,7 +48,7 @@ function createConnection(channel: VoiceBasedChannel): VoiceConnection {
 				entersState(connection, VoiceConnectionStatus.Connecting, 5_000),
 			]);
 			// Seems to be reconnecting to a new channel - ignore disconnect
-		} catch (error) {
+		} catch (_error) {
 			// Seems to be a real disconnect which SHOULDN'T be recovered from
 			connection.destroy();
 		}

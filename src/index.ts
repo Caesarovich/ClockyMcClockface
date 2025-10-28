@@ -1,8 +1,8 @@
 import "./lib/setup";
 
 import { LogLevel, SapphireClient } from "@sapphire/framework";
-import { GatewayIntentBits } from "discord.js";
 import { CronJob } from "cron";
+import { GatewayIntentBits } from "discord.js";
 
 import DiscordAnalytics from "discord-analytics/discordjs";
 import { playClockInAllGuilds } from "./lib/clock";

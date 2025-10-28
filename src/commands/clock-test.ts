@@ -1,11 +1,9 @@
+import { createReadStream } from "node:fs";
+import { createAudioResource } from "@discordjs/voice";
 import { ApplyOptions } from "@sapphire/decorators";
 import { Command } from "@sapphire/framework";
 import { ApplicationIntegrationType, InteractionContextType } from "discord.js";
-
-import { createAudioResource } from "@discordjs/voice";
 import { type Hour, isHour, playClockSound } from "../lib/clock";
-
-import { createReadStream } from "node:fs";
 import { audioPaths } from "../lib/constants";
 
 @ApplyOptions<Command.Options>({

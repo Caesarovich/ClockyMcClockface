@@ -4,10 +4,10 @@ import {
 	ApplicationIntegrationType,
 	type AutocompleteInteraction,
 	ChannelType,
+	channelMention,
 	EmbedBuilder,
 	InteractionContextType,
 	PermissionFlagsBits,
-	channelMention,
 } from "discord.js";
 import type { GuildPreferences } from "../db/schema";
 import {
